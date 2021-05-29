@@ -20,21 +20,27 @@ const SingleList = styled.div`
   .list-button {
     border: 1px solid black;
     text-align: center;
+    user-select: none;
+    cursor: pointer;
   }
 `;
 
-function List() {
+function List({ desc, remove }) {
   //
   console.log("LIST RENDERED");
   //
 
   return (
     <SingleList>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo,
-        corporis.
-      </p>
-      <div className="list-button">X</div>
+      <p>{desc}</p>
+      <div
+        className="list-button"
+        onClick={() => {
+          remove();
+        }}
+      >
+        X
+      </div>
     </SingleList>
   );
 }

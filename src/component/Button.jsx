@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import AddButton from "./AddButton";
 
+// STYLING
+//
 const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
@@ -47,18 +49,20 @@ const Pop = styled.div`
     cursor: pointer;
   }
 `;
+
+//
+// STYLING END
 function Button() {
   const [open, setOpen] = useState(false);
+  const userInput = useRef(null);
+
   //
   console.log("BUTTON RENDERED");
   //
-  useEffect(() => {
-    console.log(open);
-  }, [open]);
   return (
     <Wrapper>
       <Pop open={open}>
-        <input></input>
+        <input ref={userInput}></input>
         <button>ADD</button>
       </Pop>
       <Btn>

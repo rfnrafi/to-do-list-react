@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import List from "./List";
-import { Fragment } from "react";
+import { Fragment, useReducer } from "react";
 import Button from "./Button";
 const Wrapper = styled.div`
   margin: auto;
@@ -15,16 +15,45 @@ const Wrapper = styled.div`
 `;
 
 const ToDoList = () => {
+  const initialState = {
+    list: [
+      { id: 0, desc: "TEST" },
+      { id: 1, desc: "PROCESS" },
+    ],
+    massage: "",
+  };
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "ADD":
+        return { ...state, list: [...state.list, action.addObj] };
+        break;
+
+      case "REMOVE":
+        return {
+          ...state,
+          list: [...state.list.filter((item) => item.id != action.id)],
+        };
+        break;
+
+      default:
+        throw new Error();
+    }
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  console.log(state.list);
   return (
     <>
       <Wrapper>
-        <List></List>
-        <List></List>
-        <List></List>
-        <List></List>
-        <List></List>
-        <List></List>
-        <List></List>
+        {state.list.map((item) => {
+          return (
+            <List
+              key={item.id}
+              desc={item.desc}
+              remove={() => dispatch({ type: "REMOVE", id: item.id })}
+            />
+          );
+        })}
       </Wrapper>
       <Button />
     </>

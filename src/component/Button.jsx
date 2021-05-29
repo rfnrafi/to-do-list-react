@@ -43,6 +43,9 @@ const Pop = styled.div`
   input {
     overflow-y: auto;
   }
+  button {
+    cursor: pointer;
+  }
 `;
 function Button() {
   const [open, setOpen] = useState(false);

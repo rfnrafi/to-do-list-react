@@ -52,7 +52,7 @@ const Pop = styled.div`
 
 //
 // STYLING END
-function Button() {
+function Button({ addItem }) {
   const [open, setOpen] = useState(false);
   const userInput = useRef(null);
 
@@ -63,7 +63,17 @@ function Button() {
     <Wrapper>
       <Pop open={open}>
         <input ref={userInput}></input>
-        <button>ADD</button>
+        <button
+          onClick={() => {
+            addItem({
+              id: new Date().getTime(),
+              desc: userInput.current.value,
+            });
+            userInput.current.value = "";
+          }}
+        >
+          ADD
+        </button>
       </Pop>
       <Btn>
         <AddButton open={open} setOpen={setOpen} />

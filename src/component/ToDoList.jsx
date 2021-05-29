@@ -55,7 +55,7 @@ const ToDoList = () => {
           );
         })}
       </Wrapper>
-      <Button />
+      <Button addItem={(addObj) => dispatch({ type: "ADD", addObj })} />
     </>
   );
 };
